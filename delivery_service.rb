@@ -16,9 +16,9 @@ class DeliveryService
     @auto_park.sort_by! { |a| a.speed }
   end
 
-  def find_transport
+  def find_transport(distance)
     free = false
-    free_trans = @auto_park.find { |a| a.available == true }
+    free_trans = @auto_park.find { |a| a.available == true && a.distance >= distance }
     unless free_trans.nil?
         free = true
         free_trans.available = false
@@ -37,4 +37,4 @@ class DeliveryService
 end
 
 d =  DeliveryService.new
-d.find_transport
+d.find_transport 100
