@@ -1,27 +1,25 @@
 require_relative 'constants'
 
 class Transport
-  attr_accessor :weight, :speed, :available, :distance
+  attr_accessor :weight, :speed, :available, :distance, :time
 
-  def initialize(weight, speed, available, distance = nil)
+  def initialize(weight, speed, available, distance = nil, time = nil)
     @weight = weight
     @speed = speed
     @available = available
     @distance = distance
   end
 
-  def delivery_time
-    @distance * @speed
+  def delivery_time(distance)
+    distance * self.speed
   end
 
-  def is_bike?
-    if @distance <= Constants::BIKE_MAX_DISTANCE &&
-      @weight <= Constants::BIKE_MAX_WEIGHT &&
-      @speed <= Constants::BIKE_MAX_SPEED
-      true
-    else
-      false
-    end
+  def start_delivering
+    self.available = false
+  end
+
+  def <=>(other)
+    self.speed / self.weight <=> other.speed / other.weight
   end
 
 end

@@ -1,11 +1,18 @@
 require_relative 'transport'
+require_relative 'constants'
 
 class Car < Transport
   attr_accessor :number
 
-  def initialize(weight = 100, speed = 50, available = true, distance = 400)
-    super(weight, speed, available, distance)
-    @number = number = "#{rand(9999)}AR"
+
+  def initialize(
+    weight = Constants::CAR_MAX_WEIGHT,
+    speed = Constants::CAR_MAX_SPEED,
+    available = true,
+    distance = Constants::CAR_DEFAULT_DISTANCE
+  )
+    @number = "#{rand(9999)}AR"
+    super
   end
 
 end
