@@ -18,12 +18,11 @@ class DeliveryService
       @auto_park << Bike.new
     end
 
-    @auto_park.sort_by! { |a| a.speed }
   end
 
   def find_transport(distance, weight, priority_type)
     transport = find_fitting_transport distance, weight, priority_type
-    transport.nil? ? raise 'No free transport' :  transport.start_delivering
+    transport.nil? ?  'No free transport' :  transport.start_delivering
   end
 
   private

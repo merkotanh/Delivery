@@ -16,7 +16,7 @@ class Transport
 
   def start_delivering
     self.available = false
-    raise "#{self.class.name} is ready for delivery. Delivery time is approx #{self.delivery_time(distance)} minutes"
+    p "#{self.class.name} is ready for delivery. Delivery time is approx #{self.delivery_time(distance)} minutes"
   end
 
   def <=>(other)
