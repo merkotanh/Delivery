@@ -21,25 +21,27 @@ class DeliveryService
     @auto_park.sort_by! { |a| a.speed }
   end
 
-  def find_transport(distance, weight)
-    transport = find_fitting_transport distance, weight
+  def find_transport(distance, weight, priority_type)
+    transport = find_fitting_transport distance, weight, priority_type
 
     unless transport.nil?
       p "#{transport.class.name} is ready for delivery. Delivery time is approx #{transport.delivery_time(distance)} minutes"
       transport.start_delivering
     else
-      p 'No free transport'
+      raise 'No free transport'
     end
 
   end
 
   private
 
-  def find_fitting_transport(distance, weight)
-    @auto_park.find { |a| a.available && a.distance >= distance && a.weight >= weight}
+  def find_fitting_transport(distance, weight, type)
+    fitting_type = @auto_park.select { |a| a.class.to_s == type }
+    fitting_type = @auto_park if fitting_type.empty?
+    fitting_type.find { |a| a.available && a.distance >= distance && a.weight >= weight}
   end
 
 end
 
 d =  DeliveryService.new 3, 6
-d.find_transport 10, 3
+d.find_transport 10, 3, 'Bikefind'
