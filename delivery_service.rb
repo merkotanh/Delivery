@@ -23,13 +23,7 @@ class DeliveryService
 
   def find_transport(distance, weight, priority_type)
     transport = find_fitting_transport distance, weight, priority_type
-
-    unless transport.nil?
-      transport.start_delivering
-    else
-      raise 'No free transport'
-    end
-
+    transport.nil? ? raise 'No free transport' :  transport.start_delivering
   end
 
   private
