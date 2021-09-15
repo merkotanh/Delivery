@@ -25,7 +25,7 @@ class DeliveryService
     transport = find_fitting_transport distance, weight, priority_type
 
     unless transport.nil?
-      p "#{transport.class.name} is ready for delivery. Delivery time is approx #{transport.delivery_time(distance)} minutes"
+      raise "#{transport.class.name} is ready for delivery. Delivery time is approx #{transport.delivery_time(distance)} minutes"
       transport.start_delivering
     else
       raise 'No free transport'
