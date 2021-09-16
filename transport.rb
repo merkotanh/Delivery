@@ -20,7 +20,8 @@ class Transport
   end
 
   def <=>(other)
-    self.speed / self.weight <=> other.speed / other.weight
+    w = self.weight <=> other.weight
+    w == 0 ? self.distance <=> other.distance : w
   end
 
 end
