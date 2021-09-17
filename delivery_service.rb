@@ -23,6 +23,7 @@ class DeliveryService
   def find_transport(distance, weight, priority_type)
     transport = find_fitting_transport distance, weight, priority_type
     transport.nil? ?  'No free transport' :  transport.start_delivering
+    # @auto_park.map{ |a| a.find_by_speed(10)}
   end
 
   private
@@ -36,4 +37,6 @@ class DeliveryService
 end
 
 d =  DeliveryService.new 3, 6
-d.find_transport 10, 3, 'Bikefind'
+d.find_transport 10, 3, 'Bike'
+c = Car.new
+p c.all
