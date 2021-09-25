@@ -17,28 +17,12 @@ class Transport
     self.weight == weight ? self : false
   end
 
-  def find_by_speed(speed)
-    self.speed == speed ? self : false
+  define_method("find_by_#{attr}".to_sym) do |arg|
+    self.find { |obj| obj.attr == arg }
   end
 
-  def find_by_available(available)
-    self.available ? self : false
-  end
-
-  def find_by_location(location)
-    self.location == location ? self : false
-  end
-
-  def find_by_cost(cost)
-    self.delivery_cost == cost ? self : false
-  end
-
-  def find_by(attribute, attr)
-    self.send(attribute) == attr ? self : false
-  end
-
-  def filter_by_speed(speed)
-    # still trying to realize it
+  define_method("filter_by_#{attr}".to_sym) do |arg|
+  #
   end
 
   def delivery_time(distance)
