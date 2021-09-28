@@ -1,11 +1,25 @@
 require_relative 'transport'
+require_relative 'constants'
 
 class Bike < Transport
   attr_accessor :distance
 
-  def initialize(weight = 10, speed = 10, available = true, distance = 30)
-    super(weight, speed, available, distance)
-    # @distance = distance = 30
+  @all = []
+
+  def initialize
+    @weight = Constants::BIKE_MAX_WEIGHT
+    @speed = Constants::BIKE_MAX_SPEED
+    @available = true
+    @distance = Constants::BIKE_MAX_DISTANCE
+    Bike.all << self
+  end
+
+  def self.all
+    @all
+  end
+
+  def all
+    self.class.all
   end
 
 end
